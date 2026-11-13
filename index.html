@@ -1,131 +1,326 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#14532d">
-  <title>مجتمع الناجحين | الأعضاء</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مجتمع الناجحين - في انتظاركم</title>
   <style>
-    :root{--green:#14532d;--green2:#166534;--gold:#d6a84f;--bg:#f4f7f3;--ink:#18251c;--muted:#68756b;--line:#e1e9e1}
-    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Tahoma,Arial,sans-serif}
-    header{background:linear-gradient(135deg,#0f3d24,#197044);color:white;padding:28px 18px;text-align:center}
-    header h1{margin:0 0 8px;font-size:27px}header p{margin:0;color:#e0eee3}
-    main{max-width:900px;margin:22px auto;padding:0 14px}
-    .panel{background:white;border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:16px;box-shadow:0 5px 18px #173d2010}
-    .stats{display:flex;gap:10px;flex-wrap:wrap}.stat{flex:1;min-width:130px;background:#eff7ef;border-radius:12px;padding:13px;text-align:center}
-    .stat strong{display:block;color:var(--green);font-size:25px}.stat span{font-size:13px;color:var(--muted)}
-    h2{font-size:19px;margin:0 0 14px;color:var(--green)}
-    .formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    input{width:100%;padding:13px;border:1px solid #cfdacf;border-radius:10px;font:inherit;min-width:0}
-    button{border:0;border-radius:10px;padding:12px 16px;font:inherit;font-weight:bold;cursor:pointer}
-    .primary{background:var(--green2);color:white}.secondary{background:#edf3ed;color:var(--green)}
-    .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-    .search{margin-bottom:12px}
-    table{width:100%;border-collapse:collapse}th,td{padding:12px 9px;border-bottom:1px solid var(--line);text-align:right}
-    th{color:var(--muted);font-size:13px;background:#f8faf8}td:first-child{width:55px;color:var(--muted)}
-    .tag{font-size:12px;background:#fff4d9;color:#805d15;padding:5px 8px;border-radius:20px}
-    .remove{background:#fff0f0;color:#a12b2b;padding:7px 10px;font-size:12px}
-    .note{font-size:13px;color:var(--muted);line-height:1.8}
-    footer{text-align:center;color:var(--muted);padding:18px;font-size:12px}
-    @media(max-width:600px){.formgrid{grid-template-columns:1fr}header h1{font-size:23px}th,td{padding:10px 6px;font-size:13px}}
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      margin: 0;
+      background-color: #f3f6fa;
+      color: #1e293b;
+      padding: 20px;
+    }
+    #members-widget {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+    .header-box {
+      background: linear-gradient(135deg, #0f172a, #1d4ed8);
+      color: #ffffff;
+      padding: 28px 20px;
+      border-radius: 16px;
+      text-align: center;
+      margin-bottom: 20px;
+      box-shadow: 0 6px 18px rgba(29, 78, 216, 0.18);
+    }
+    .header-box h1 {
+      margin: 0 0 8px;
+      font-size: 1.9rem;
+    }
+    .header-box p {
+      margin: 0;
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .stat-box {
+      background: #ffffff;
+      padding: 18px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      border-bottom: 4px solid #1d4ed8;
+    }
+    .stat-box.confirmed {
+      border-bottom-color: #16a34a;
+    }
+    .stat-box h2 {
+      margin: 0;
+      font-size: 2rem;
+      color: #0f172a;
+    }
+    .stat-box span {
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+    .panel {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      margin-bottom: 20px;
+    }
+    .add-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .add-form input, .search-bar {
+      flex: 1;
+      min-width: 200px;
+      padding: 12px 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      outline: none;
+    }
+    .add-form input:focus, .search-bar:focus {
+      border-color: #1d4ed8;
+    }
+    .btn {
+      padding: 11px 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.9rem;
+      transition: 0.2s;
+    }
+    .btn-primary { background: #1d4ed8; color: #fff; }
+    .btn-primary:hover { background: #1e40af; }
+    .btn-success { background: #16a34a; color: #fff; }
+    .btn-success:hover { background: #15803d; }
+    .btn-secondary { background: #e2e8f0; color: #334155; }
+    .btn-secondary:hover { background: #cbd5e1; }
+    .btn-sm { padding: 6px 10px; font-size: 0.8rem; }
+    .btn-edit { background: #e0f2fe; color: #0369a1; }
+    .btn-del { background: #fee2e2; color: #dc2626; }
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    .table-wrap {
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 12px 14px;
+      text-align: right;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    th {
+      background-color: #f8fafc;
+      color: #475569;
+      font-weight: 600;
+    }
+    tr:hover {
+      background-color: #f8fafc;
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+    .status-ok { background: #dcfce7; color: #16a34a; }
+    .status-wait { background: #fef3c7; color: #d97706; }
   </style>
 </head>
 <body>
-<header>
-  <h1>مجتمع الناجحين</h1>
-  <p>منصة الأعضاء والتدريب والتواصل</p>
-</header>
-<main>
-  <section class="panel">
-    <div class="stats">
-      <div class="stat"><strong id="total">0</strong><span>إجمالي الأسماء</span></div>
-      <div class="stat"><strong id="verified">0</strong><span>عضويات مؤكدة</span></div>
+
+<div id="members-widget">
+  <div class="header-box">
+    <h1>مجتمع الناجحين - في انتظاركم</h1>
+    <p>القائمة المعتمدة للأعضاء المسجلين</p>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-box">
+      <h2 id="countTotal">0</h2>
+      <span>إجمالي الأسماء</span>
     </div>
-  </section>
+    <div class="stat-box confirmed">
+      <h2 id="countConfirmed" style="color: #16a34a;">0</h2>
+      <span>عضويات مؤكدة</span>
+    </div>
+  </div>
 
-  <section class="panel">
-    <h2>إضافة عضو جديد</h2>
-    <form id="memberForm">
-      <div class="formgrid">
-        <input id="memberName" placeholder="الاسم الكامل" required maxlength="90">
-        <input id="memberId" placeholder="رقم عضوية DXN (اختياري)" maxlength="40">
-      </div>
-      <div class="actions">
-        <button class="primary" type="submit">إضافة العضو</button>
-        <button class="secondary" type="button" id="exportBtn">تنزيل قائمة الأعضاء CSV</button>
-      </div>
-    </form>
-    <p class="note">يمنع التطبيق إضافة الاسم نفسه مرتين على هذا الجهاز. تأكيد عضوية DXN يتم يدويًا بعد مراجعة الرقم؛ هذه الصفحة وحدها لا تتصل بنظام شركة DXN.</p>
-  </section>
+  <div class="panel">
+    <div class="add-form">
+      <input type="text" id="inputName" placeholder="أدخل اسم العضو الجديد..." />
+      <input type="text" id="inputId" placeholder="رقم العضوية (اختياري)..." />
+      <button class="btn btn-primary" onclick="addNewMember()">+ إضافة للقائمة</button>
+    </div>
+  </div>
 
-  <section class="panel">
-    <h2>قائمة الأعضاء والمشاركين في التدريب</h2>
-    <input class="search" id="search" placeholder="ابحث عن اسم...">
-    <div style="overflow-x:auto">
+  <div class="panel">
+    <div class="toolbar">
+      <input type="text" id="inputSearch" class="search-bar" placeholder="ابحث بالاسم أو رقم العضوية..." onkeyup="drawTable()" />
+      <div style="display: flex; gap: 8px;">
+        <button class="btn btn-success" onclick="downloadCSV()">تحميل ملف Excel</button>
+        <button class="btn btn-secondary" onclick="resetList()">تحديث القائمة الأساسية</button>
+      </div>
+    </div>
+
+    <div class="table-wrap">
       <table>
-        <thead><tr><th>#</th><th>اسم العضو</th><th>رقم العضوية</th><th>الحالة</th><th></th></tr></thead>
-        <tbody id="members"></tbody>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>اسم العضو</th>
+            <th>رقم العضوية</th>
+            <th>الحالة</th>
+            <th>خيارات</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
       </table>
     </div>
-    <p class="note" id="empty" hidden>لا توجد أسماء مطابقة للبحث.</p>
-  </section>
-</main>
-<footer>مجتمع الناجحين · نسخة أولية قابلة للتطوير</footer>
+  </div>
+</div>
+
 <script>
-  const initialMembers = [
-    {name:"الشفاء", id:"", status:"يحتاج مراجعة"},
-    {name:"أم الخيرات", id:"", status:"يحتاج مراجعة"},
-    {name:"منير بايت", id:"", status:"يحتاج مراجعة"},
-    {name:"حبيب محمد", id:"", status:"يحتاج مراجعة"},
-    {name:"أحمد", id:"", status:"يحتاج مراجعة"},
-    {name:"السالم فال", id:"", status:"يحتاج مراجعة"},
-    {name:"فاطمة", id:"", status:"يحتاج مراجعة"},
-    {name:"مريم", id:"", status:"يحتاج مراجعة"},
-    {name:"سمير", id:"", status:"يحتاج مراجعة"},
-    {name:"اسم غير واضح - راجعه", id:"", status:"يحتاج مراجعة"},
-    {name:"اسم غير واضح - راجعه", id:"", status:"يحتاج مراجعة"},
-    {name:"الحسين محمد - راجع بقية الاسم", id:"", status:"يحتاج مراجعة"},
-    {name:"اسم غير واضح - راجعه", id:"", status:"يحتاج مراجعة"},
-    {name:"أحمد محمد - راجع الاسم", id:"", status:"يحتاج مراجعة"},
-    {name:"أم السكينة", id:"", status:"يحتاج مراجعة"},
-    {name:"مفتاح", id:"", status:"يحتاج مراجعة"},
-    {name:"عيشة سولة", id:"", status:"يحتاج مراجعة"}
+  // القائمة الجديدة المعتمدة (18 عضواً)
+  const initialList = [
+    { name: "قائدنا محمد محمود", id: "818992418" },
+    { name: "ام اشويمة الهادي", id: "821458243" },
+    { name: "السالمة فال", id: "821197453" },
+    { name: "مريم تغل", id: "819199176" },
+    { name: "اميمة سيداحمد", id: "821104957" },
+    { name: "سيدي محمد تقي", id: "829993798" },
+    { name: "لالة سيدي محمد", id: "820731767" },
+    { name: "الحسين محمد", id: "826532065" },
+    { name: "احمد محمد الامين", id: "829060444" },
+    { name: "مفتاحة", id: "819286015" },
+    { name: "عيشة سولة", id: "829202011" },
+    { name: "امباركة بلعمش", id: "829603021" },
+    { name: "خديجة الشيخ", id: "819270875" },
+    { name: "مريم سيدي محمد", id: "819199176" },
+    { name: "مريم بابت", id: "820293194" },
+    { name: "الشفاء", id: "829760117" },
+    { name: "خديجة محمد", id: "819081939" },
+    { name: "احمد بيها", id: "" }
   ];
-  const key = "najihin_members_v1";
-  let members;
-  try {
-    const saved = JSON.parse(localStorage.getItem(key));
-    members = Array.isArray(saved) ? saved : initialMembers;
-  } catch { members = initialMembers; }
-  const norm = s => String(s||"").trim().replace(/\s+/g," ").toLocaleLowerCase("ar");
-  function save(){localStorage.setItem(key,JSON.stringify(members));render();}
-  function render(){
-    const q=norm(document.getElementById("search").value);
-    const filtered=members.map((m,i)=>({...m,index:i})).filter(m=>norm(m.name).includes(q)||norm(m.id).includes(q));
-    document.getElementById("members").innerHTML=filtered.map(m=>`<tr><td>${m.index+1}</td><td>${escapeHtml(m.name)}</td><td>${escapeHtml(m.id||"—")}</td><td><span class="tag">${escapeHtml(m.status||"يحتاج مراجعة")}</span></td><td><button class="remove" onclick="removeMember(${m.index})">حذف</button></td></tr>`).join("");
-    document.getElementById("empty").hidden=filtered.length!==0;
-    document.getElementById("total").textContent=members.length;
-    document.getElementById("verified").textContent=members.filter(m=>m.status==="مؤكد").length;
+
+  const DB_KEY = "najiheen_list_final_v1";
+  let membersData = JSON.parse(localStorage.getItem(DB_KEY)) || [...initialList];
+
+  function saveToStorage() {
+    localStorage.setItem(DB_KEY, JSON.stringify(membersData));
   }
-  function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
-  function removeMember(i){if(confirm("هل تريد حذف هذا الاسم؟")){members.splice(i,1);save();}}
-  document.getElementById("memberForm").addEventListener("submit",e=>{
-    e.preventDefault();
-    const name=document.getElementById("memberName").value.trim();
-    const id=document.getElementById("memberId").value.trim();
-    if(!name)return;
-    if(members.some(m=>norm(m.name)===norm(name))){alert("هذا الاسم موجود بالفعل، لم تتم إضافته مرة أخرى.");return;}
-    if(id && members.some(m=>norm(m.id)===norm(id))){alert("رقم العضوية مسجل بالفعل.");return;}
-    members.push({name,id,status:"يحتاج مراجعة"});
-    e.target.reset();save();
-  });
-  document.getElementById("search").addEventListener("input",render);
-  document.getElementById("exportBtn").addEventListener("click",()=>{
-    const rows=[["الاسم","رقم العضوية","الحالة"],...members.map(m=>[m.name,m.id,m.status])];
-    const csv="\uFEFF"+rows.map(r=>r.map(v=>'"'+String(v||"").replace(/"/g,'""')+'"').join(",")).join("\n");
-    const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));a.download="members.csv";a.click();URL.revokeObjectURL(a.href);
-  });
-  render();
+
+  function drawTable() {
+    const tbody = document.getElementById("tableBody");
+    const search = document.getElementById("inputSearch").value.trim().toLowerCase();
+    tbody.innerHTML = "";
+
+    let confirmed = 0;
+
+    membersData.forEach((item, idx) => {
+      const hasId = item.id && item.id.trim() !== "";
+      if (hasId) confirmed++;
+
+      if (item.name.toLowerCase().includes(search) || item.id.includes(search)) {
+        tbody.innerHTML += `
+          <tr>
+            <td>${idx + 1}</td>
+            <td><strong>${item.name}</strong></td>
+            <td>${hasId ? item.id : "قيد الانتظار"}</td>
+            <td>
+              <span class="status-badge ${hasId ? "status-ok" : "status-wait"}">
+                ${hasId ? "مؤكدة" : "بدون رقم"}
+              </span>
+            </td>
+            <td style="display: flex; gap: 6px;">
+              <button class="btn btn-sm btn-edit" onclick="editMemberId(${idx})">تعديل الرقم</button>
+              <button class="btn btn-sm btn-del" onclick="removeMember(${idx})">حذف</button>
+            </td>
+          </tr>
+        `;
+      }
+    });
+
+    document.getElementById("countTotal").textContent = membersData.length;
+    document.getElementById("countConfirmed").textContent = confirmed;
+  }
+
+  function addNewMember() {
+    const nameEl = document.getElementById("inputName");
+    const idEl = document.getElementById("inputId");
+    const name = nameEl.value.trim();
+    const id = idEl.value.trim();
+
+    if (!name) {
+      alert("يرجى كتابة اسم العضو أولاً.");
+      return;
+    }
+
+    membersData.push({ name, id });
+    saveToStorage();
+    nameEl.value = "";
+    idEl.value = "";
+    drawTable();
+  }
+
+  function editMemberId(idx) {
+    const newId = prompt(`أدخل رقم العضوية الجديد للعضو (${membersData[idx].name}):`, membersData[idx].id);
+    if (newId !== null) {
+      membersData[idx].id = newId.trim();
+      saveToStorage();
+      drawTable();
+    }
+  }
+
+  function removeMember(idx) {
+    if (confirm(`هل تريد حذف (${membersData[idx].name}) من القائمة؟`)) {
+      membersData.splice(idx, 1);
+      saveToStorage();
+      drawTable();
+    }
+  }
+
+  function resetList() {
+    if (confirm("سيتم استعادة القائمة الأساسية المكونة من 18 اسماً، هل أنت متأكد؟")) {
+      membersData = [...initialList];
+      saveToStorage();
+      drawTable();
+    }
+  }
+
+  function downloadCSV() {
+    let csvContent = "\uFEFFالرقم,اسم العضو,رقم العضوية\n";
+    membersData.forEach((m, i) => {
+      csvContent += `${i + 1},"${m.name}","${m.id}"\n`;
+    });
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "قائمة_انتظاركم.csv";
+    a.click();
+  }
+
+  saveToStorage();
+  drawTable();
 </script>
+
 </body>
 </html>
