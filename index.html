@@ -1,1 +1,48 @@
 
+<script>
+(function () {
+  function تحديث_الوقت_والتاريخ() {
+    const الآن = new Date();
+
+    // ساعة نواكشوط
+    const الوقت = new Intl.DateTimeFormat('ar-MR', {
+      timeZone: 'Africa/Nouakchott',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+    }).format(الآن);
+
+    // التاريخ الميلادي
+    const التاريخ = new Intl.DateTimeFormat('ar-MR', {
+      timeZone: 'Africa/Nouakchott',
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    }).format(الآن);
+
+    // التاريخ الهجري
+    const الهجري = new Intl.DateTimeFormat(
+      'ar-MA-u-ca-islamic',
+      {
+        timeZone: 'Africa/Nouakchott',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      }
+    ).format(الآن);
+
+    const ساعة = document.getElementById('tm');
+    const ميلادي = document.getElementById('dt');
+    const هجري = document.getElementById('hj');
+
+    if (ساعة) ساعة.textContent = الوقت;
+    if (ميلادي) ميلادي.textContent = التاريخ;
+    if (هجري) هجري.textContent = الهجري;
+  }
+
+  تحديث_الوقت_والتاريخ();
+  setInterval(تحديث_الوقت_والتاريخ, 1000);
+})();
+</script>
